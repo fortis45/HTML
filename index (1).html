@@ -1,0 +1,1111 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   E-Counselling Web App
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+  <!-- Header / Navigation -->
+  <header class="bg-white shadow sticky top-0 z-50">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+    <a class="flex items-center space-x-2" href="#">
+     <img alt="E-Counselling logo, stylized letters E and C in blue and green" class="w-10 h-10 rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/877861d3-3ab6-44b9-5a4a-c87c1b6132ca.jpg" width="40"/>
+     <span class="font-semibold text-xl text-indigo-600">
+      E-Counselling
+     </span>
+    </a>
+    <nav class="hidden md:flex space-x-6 font-medium text-gray-700">
+     <a class="hover:text-indigo-600 transition" href="#therapists">
+      Find Therapists
+     </a>
+     <a class="hover:text-indigo-600 transition" href="#resources">
+      Resources
+     </a>
+     <a class="hover:text-indigo-600 transition" href="#about">
+      About
+     </a>
+     <a class="hover:text-indigo-600 transition" href="#contact">
+      Contact
+     </a>
+    </nav>
+    <div class="hidden md:flex space-x-4">
+     <button class="text-indigo-600 font-semibold hover:underline focus:outline-none" id="loginBtn">
+      Login
+     </button>
+     <button class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none" id="registerBtn">
+      Register
+     </button>
+    </div>
+    <button class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none" id="mobileMenuBtn">
+     <i class="fas fa-bars fa-lg">
+     </i>
+    </button>
+   </div>
+   <!-- Mobile Menu -->
+   <nav class="hidden md:hidden bg-white border-t border-gray-200" id="mobileMenu">
+    <a class="block px-4 py-3 border-b border-gray-200 hover:bg-indigo-50 text-indigo-700 font-semibold" href="#therapists">
+     Find Therapists
+    </a>
+    <a class="block px-4 py-3 border-b border-gray-200 hover:bg-indigo-50" href="#resources">
+     Resources
+    </a>
+    <a class="block px-4 py-3 border-b border-gray-200 hover:bg-indigo-50" href="#about">
+     About
+    </a>
+    <a class="block px-4 py-3 border-b border-gray-200 hover:bg-indigo-50" href="#contact">
+     Contact
+    </a>
+    <button class="w-full text-left px-4 py-3 border-b border-gray-200 text-indigo-600 font-semibold hover:bg-indigo-50 focus:outline-none" id="mobileLoginBtn">
+     Login
+    </button>
+    <button class="w-full text-left px-4 py-3 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none" id="mobileRegisterBtn">
+     Register
+    </button>
+   </nav>
+  </header>
+  <main class="flex-grow">
+   <!-- Hero Section -->
+   <section class="bg-indigo-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-20 sm:py-32 text-center">
+     <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight max-w-3xl mx-auto">
+      Connect with Licensed Therapists Anytime, Anywhere
+     </h1>
+     <p class="mt-6 text-lg max-w-xl mx-auto">
+      Secure, confidential, and compassionate mental health support tailored to you.
+     </p>
+     <div class="mt-10 flex justify-center space-x-4">
+      <button class="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-md shadow hover:bg-gray-100 focus:outline-none" id="heroRegisterBtn">
+       Get Started
+      </button>
+      <a class="inline-flex items-center space-x-2 text-white underline hover:text-indigo-200 font-semibold" href="#therapists">
+       <span>
+        Find a Therapist
+       </span>
+       <i class="fas fa-arrow-right">
+       </i>
+      </a>
+     </div>
+     <div class="mt-12 flex justify-center">
+      <img alt="Illustration of diverse people smiling and talking with a therapist online via video call on laptop and mobile devices" class="rounded-lg shadow-lg max-w-full h-auto" height="350" src="https://storage.googleapis.com/a1aa/image/5eb62741-7d9b-4281-fd00-e60ad93cd27c.jpg" width="600"/>
+     </div>
+    </div>
+   </section>
+   <!-- Registration & Login Modal -->
+   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden" id="authModal">
+    <div class="bg-white rounded-lg max-w-md w-full shadow-lg overflow-hidden">
+     <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-800" id="authModalTitle">
+       Login
+      </h2>
+      <button class="text-gray-600 hover:text-gray-900 focus:outline-none" id="authModalClose">
+       <i class="fas fa-times fa-lg">
+       </i>
+      </button>
+     </div>
+     <div class="px-6 py-6">
+      <form class="space-y-6" id="authForm">
+       <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="authUserType">
+         I am a
+        </label>
+        <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="authUserType" name="userType" required="">
+         <option selected="" value="client">
+          Client
+         </option>
+         <option value="therapist">
+          Therapist
+         </option>
+        </select>
+       </div>
+       <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="authEmail">
+         Email address
+        </label>
+        <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="authEmail" name="email" placeholder="you@example.com" required="" type="email"/>
+       </div>
+       <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="authPassword">
+         Password
+        </label>
+        <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="authPassword" name="password" placeholder="********" required="" type="password"/>
+       </div>
+       <div class="hidden" id="authConfirmPasswordContainer">
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="authConfirmPassword">
+         Confirm Password
+        </label>
+        <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="authConfirmPassword" name="confirmPassword" placeholder="********" type="password"/>
+       </div>
+       <div class="flex justify-between items-center text-sm">
+        <button class="bg-indigo-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none" type="submit">
+         Login
+        </button>
+        <button class="text-indigo-600 hover:underline focus:outline-none" id="toggleAuthMode" type="button">
+         Don't have an account? Register
+        </button>
+       </div>
+       <div class="text-right text-sm">
+        <button class="text-indigo-600 hover:underline focus:outline-none" id="forgotPasswordBtn" type="button">
+         Forgot password?
+        </button>
+       </div>
+      </form>
+      <form class="space-y-6 hidden" id="forgotPasswordForm">
+       <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" for="forgotEmail">
+         Enter your email to reset password
+        </label>
+        <input class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="forgotEmail" name="forgotEmail" placeholder="you@example.com" required="" type="email"/>
+       </div>
+       <div class="flex justify-between items-center text-sm">
+        <button class="bg-indigo-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none" type="submit">
+         Send Reset Link
+        </button>
+        <button class="text-indigo-600 hover:underline focus:outline-none" id="cancelForgotPassword" type="button">
+         Cancel
+        </button>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div>
+   <!-- Therapist Discovery Section -->
+   <section class="max-w-7xl mx-auto px-4 py-16 sm:py-24" id="therapists">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">
+     Find Your Therapist
+    </h2>
+    <form class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12" id="searchForm">
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="specialization">
+       Specialization
+      </label>
+      <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="specialization" name="specialization">
+       <option value="">
+        Any
+       </option>
+       <option value="anxiety">
+        Anxiety
+       </option>
+       <option value="depression">
+        Depression
+       </option>
+       <option value="stress">
+        Stress Management
+       </option>
+       <option value="relationship">
+        Relationship Issues
+       </option>
+       <option value="trauma">
+        Trauma
+       </option>
+       <option value="addiction">
+        Addiction
+       </option>
+       <option value="grief">
+        Grief
+       </option>
+      </select>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="language">
+       Language
+      </label>
+      <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="language" name="language">
+       <option value="">
+        Any
+       </option>
+       <option value="english">
+        English
+       </option>
+       <option value="spanish">
+        Spanish
+       </option>
+       <option value="french">
+        French
+       </option>
+       <option value="mandarin">
+        Mandarin
+       </option>
+       <option value="arabic">
+        Arabic
+       </option>
+       <option value="hindi">
+        Hindi
+       </option>
+      </select>
+     </div>
+     <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1" for="availability">
+       Availability
+      </label>
+      <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="availability" name="availability">
+       <option value="">
+        Any
+       </option>
+       <option value="morning">
+        Morning (8am - 12pm)
+       </option>
+       <option value="afternoon">
+        Afternoon (12pm - 5pm)
+       </option>
+       <option value="evening">
+        Evening (5pm - 9pm)
+       </option>
+      </select>
+     </div>
+     <div class="flex items-end">
+      <button class="w-full bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none" type="submit">
+       Search
+      </button>
+     </div>
+    </form>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="therapistList">
+     <!-- Therapist Cards -->
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a smiling middle-aged female therapist with glasses and short hair wearing a light blue blouse" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/7beb435b-151f-494d-f68a-3791ed70f5b5.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Dr. Emily Carter
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Clinical Psychologist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Specializes in anxiety, depression, and trauma therapy.
+       </p>
+       <div aria-label="Rating: 4.8 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (124 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Dr. Emily Carter" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young male therapist with beard and casual shirt smiling warmly" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/bcb29341-4efd-4ee4-cc52-042878935556.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        James Nguyen, LCSW
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Licensed Clinical Social Worker
+       </p>
+       <p class="text-gray-700 mb-2">
+        Expert in relationship counseling and stress management.
+       </p>
+       <div aria-label="Rating: 4.6 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (98 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with James Nguyen" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged female therapist with curly hair and glasses wearing a white blouse" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/c765936c-865b-406b-4b0d-b2b713671543.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Dr. Sofia Martinez
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Psychotherapist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Focus on grief counseling and addiction recovery.
+       </p>
+       <div aria-label="Rating: 4.9 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (150 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Dr. Sofia Martinez" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young female therapist with long hair smiling warmly wearing a green sweater" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/40727779-d1d7-492a-c0ec-a8a2b4199456.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Maya Patel, LPC
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Licensed Professional Counselor
+       </p>
+       <p class="text-gray-700 mb-2">
+        Specializes in stress management and anxiety disorders.
+       </p>
+       <div aria-label="Rating: 4.7 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (110 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Maya Patel" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged male therapist with short hair and glasses wearing a navy blue shirt" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/088928d8-6081-49c7-71d0-8ebac7fa778b.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Dr. Michael Johnson
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Psychiatrist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Expertise in depression, bipolar disorder, and medication management.
+       </p>
+       <div aria-label="Rating: 4.5 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (85 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Dr. Michael Johnson" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young female therapist with short hair and earrings wearing a white shirt and smiling" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/1676290d-779f-41dd-fc04-cbfa11698d77.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Anna Kim, MFT
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Marriage and Family Therapist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Focus on relationship issues and family therapy.
+       </p>
+       <div aria-label="Rating: 4.8 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (120 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Anna Kim" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged female therapist with long hair smiling warmly wearing a beige sweater" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/655a968d-cfb6-4345-a3cc-447370f39d61.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Dr. Rachel Lee
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Clinical Psychologist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Specializes in trauma and PTSD therapy.
+       </p>
+       <div aria-label="Rating: 4.9 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (140 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Dr. Rachel Lee" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young male therapist with short hair smiling wearing a light gray shirt" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/4a54a8c4-3919-47b9-57e1-85a3123144a7.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        David Smith, LPC
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Licensed Professional Counselor
+       </p>
+       <p class="text-gray-700 mb-2">
+        Focus on addiction recovery and stress management.
+       </p>
+       <div aria-label="Rating: 4.6 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (90 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with David Smith" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged female therapist with short hair smiling wearing a light pink blouse" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/d8687688-9589-41b5-91ba-48427c95ef68.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Linda Gomez, MFT
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Marriage and Family Therapist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Expertise in family therapy and relationship counseling.
+       </p>
+       <div aria-label="Rating: 4.7 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (105 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Linda Gomez" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young female therapist with curly hair smiling wearing a blue shirt" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/3482888a-4080-4901-cc7e-874def47b472.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Jessica Brown, LPC
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Licensed Professional Counselor
+       </p>
+       <p class="text-gray-700 mb-2">
+        Specializes in anxiety and depression therapy.
+       </p>
+       <div aria-label="Rating: 4.8 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (115 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Jessica Brown" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged male therapist with beard smiling wearing a dark green shirt" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/767c2ad4-5f4c-4fcd-73fd-772eb7222934.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Robert Wilson, PhD
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Clinical Psychologist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Focus on trauma, PTSD, and stress management.
+       </p>
+       <div aria-label="Rating: 4.7 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (100 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Robert Wilson" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young female therapist with long hair and glasses smiling wearing a white blouse" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/96e38b2e-d77a-46f4-b61d-385b3e7e1ef4.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Olivia Davis, LCSW
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Licensed Clinical Social Worker
+       </p>
+       <p class="text-gray-700 mb-2">
+        Specializes in depression and anxiety disorders.
+       </p>
+       <div aria-label="Rating: 4.9 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (130 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Olivia Davis" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged female therapist with short hair smiling wearing a light blue shirt" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/27894508-67c1-4d31-50e2-02a4a4306982.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Karen Thompson, MFT
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Marriage and Family Therapist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Focus on family therapy and relationship counseling.
+       </p>
+       <div aria-label="Rating: 4.6 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (95 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Karen Thompson" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young male therapist with glasses smiling wearing a white shirt and navy blazer" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/a8dc1fc8-41fa-4f3e-5284-0d1f0ce0f8fb.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Ethan Clark, PsyD
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Clinical Psychologist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Expertise in stress management and anxiety disorders.
+       </p>
+       <div aria-label="Rating: 4.7 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (102 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Ethan Clark" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged female therapist with long hair smiling wearing a lavender blouse" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/c9f21637-03cf-4952-333a-2714a182df3b.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Dr. Angela White
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Psychotherapist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Specializes in depression and anxiety therapy.
+       </p>
+       <div aria-label="Rating: 4.8 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (118 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Dr. Angela White" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young female therapist with short hair smiling wearing a red blouse" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/c3c4a9e6-949b-436a-f47f-b84380dd5137.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Samantha Green, LPC
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Licensed Professional Counselor
+       </p>
+       <p class="text-gray-700 mb-2">
+        Focus on stress management and relationship counseling.
+       </p>
+       <div aria-label="Rating: 4.7 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (108 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Samantha Green" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a middle-aged male therapist with glasses smiling wearing a light blue shirt" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/bebcba3e-4fe5-4a36-4955-d9db34f41dc2.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Dr. Steven Hall
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Psychiatrist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Expertise in medication management and mood disorders.
+       </p>
+       <div aria-label="Rating: 4.5 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="far fa-star">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (80 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Dr. Steven Hall" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+     <article class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+      <img alt="Portrait of a young female therapist with long hair smiling wearing a yellow blouse" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/459ec9c3-03e8-4daf-dd4a-50c8b41481f6.jpg" width="400"/>
+      <div class="p-6 flex flex-col flex-grow">
+       <h3 class="text-xl font-semibold text-gray-900">
+        Emily Roberts, MFT
+       </h3>
+       <p class="text-indigo-600 font-medium mb-1">
+        Marriage and Family Therapist
+       </p>
+       <p class="text-gray-700 mb-2">
+        Focus on relationship issues and family dynamics.
+       </p>
+       <div aria-label="Rating: 4.8 out of 5 stars" class="flex items-center text-yellow-400 mb-3">
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star">
+        </i>
+        <i class="fas fa-star-half-alt">
+        </i>
+        <span class="ml-2 text-gray-600 text-sm">
+         (112 reviews)
+        </span>
+       </div>
+       <button aria-label="Book appointment with Emily Roberts" class="mt-auto bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none">
+        Book Appointment
+       </button>
+      </div>
+     </article>
+    </div>
+   </section>
+   <!-- Resources Section -->
+   <section class="bg-white py-16" id="resources">
+    <div class="max-w-7xl mx-auto px-4">
+     <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">
+      Self-Help Resources
+     </h2>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <article class="bg-indigo-50 rounded-lg p-6 flex flex-col shadow-sm">
+       <img alt="Illustration of a person meditating in a peaceful natural setting with soft colors" class="rounded-md mb-4 object-cover h-40 w-full" height="200" src="https://storage.googleapis.com/a1aa/image/15034820-f0ed-479b-5914-6c6224a25bac.jpg" width="400"/>
+       <h3 class="text-xl font-semibold text-indigo-700 mb-2">
+        Mindfulness Meditation
+       </h3>
+       <p class="text-gray-700 flex-grow">
+        Learn techniques to stay present and reduce stress through guided meditation exercises.
+       </p>
+       <a class="mt-4 inline-flex items-center text-indigo-600 font-semibold hover:underline" href="#">
+        Read More
+        <i class="fas fa-arrow-right ml-2">
+        </i>
+       </a>
+      </article>
+      <article class="bg-indigo-50 rounded-lg p-6 flex flex-col shadow-sm">
+       <img alt="Illustration of a person calmly managing anxiety with breathing exercises and positive thoughts" class="rounded-md mb-4 object-cover h-40 w-full" height="200" src="https://storage.googleapis.com/a1aa/image/078ff8e1-162d-4e4c-eeef-ca3147f27cb4.jpg" width="400"/>
+       <h3 class="text-xl font-semibold text-indigo-700 mb-2">
+        Managing Anxiety
+       </h3>
+       <p class="text-gray-700 flex-grow">
+        Explore practical tips and exercises to help manage anxiety symptoms effectively.
+       </p>
+       <a class="mt-4 inline-flex items-center text-indigo-600 font-semibold hover:underline" href="#">
+        Read More
+        <i class="fas fa-arrow-right ml-2">
+        </i>
+       </a>
+      </article>
+      <article class="bg-indigo-50 rounded-lg p-6 flex flex-col shadow-sm">
+       <img alt="Illustration of two people communicating and building healthy relationships with empathy and respect" class="rounded-md mb-4 object-cover h-40 w-full" height="200" src="https://storage.googleapis.com/a1aa/image/e0af5759-9395-4cd0-5394-dc5ed87974f7.jpg" width="400"/>
+       <h3 class="text-xl font-semibold text-indigo-700 mb-2">
+        Building Healthy Relationships
+       </h3>
+       <p class="text-gray-700 flex-grow">
+        Discover strategies to improve communication and strengthen your personal relationships.
+       </p>
+       <a class="mt-4 inline-flex items-center text-indigo-600 font-semibold hover:underline" href="#">
+        Read More
+        <i class="fas fa-arrow-right ml-2">
+        </i>
+       </a>
+      </article>
+     </div>
+    </div>
+   </section>
+   <!-- About Section -->
+   <section class="max-w-7xl mx-auto px-4 py-16 sm:py-24" id="about">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">
+     About E-Counselling
+    </h2>
+    <div class="max-w-4xl mx-auto text-center text-gray-700 space-y-6">
+     <p>
+      E-Counselling is a secure and confidential platform designed to connect individuals seeking mental health support with licensed professional therapists. Our mission is to provide accessible, compassionate, and personalized care to help you navigate life's challenges.
+     </p>
+     <p>
+      We prioritize your privacy and security, ensuring all communications and sessions are encrypted and confidential. Whether you prefer text chat, video calls, or resource sharing, our platform offers flexible options tailored to your needs.
+     </p>
+     <p>
+      Join thousands of satisfied clients who have found support and healing through our trusted network of therapists.
+     </p>
+    </div>
+   </section>
+   <!-- Contact Section -->
+   <section class="bg-indigo-600 text-white py-16" id="contact">
+    <div class="max-w-7xl mx-auto px-4">
+     <h2 class="text-3xl font-extrabold mb-8 text-center">
+      Contact Us
+     </h2>
+     <form aria-label="Contact form" class="max-w-3xl mx-auto grid grid-cols-1 gap-6">
+      <div>
+       <label class="block text-sm font-medium mb-1" for="contactName">
+        Name
+       </label>
+       <input class="w-full rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300" id="contactName" name="contactName" placeholder="Your full name" required="" type="text"/>
+      </div>
+      <div>
+       <label class="block text-sm font-medium mb-1" for="contactEmail">
+        Email
+       </label>
+       <input class="w-full rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300" id="contactEmail" name="contactEmail" placeholder="you@example.com" required="" type="email"/>
+      </div>
+      <div>
+       <label class="block text-sm font-medium mb-1" for="contactMessage">
+        Message
+       </label>
+       <textarea class="w-full rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300" id="contactMessage" name="contactMessage" placeholder="Write your message here..." required="" rows="5"></textarea>
+      </div>
+      <div class="text-center">
+       <button class="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-md hover:bg-gray-100 focus:outline-none" type="submit">
+        Send Message
+       </button>
+      </div>
+     </form>
+    </div>
+   </section>
+  </main>
+  <!-- Footer -->
+  <footer class="bg-gray-100 text-gray-600 py-8">
+   <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+    <p class="text-sm">
+     © 2024 E-Counselling. All rights reserved.
+    </p>
+    <div class="flex space-x-6 text-lg">
+     <a aria-label="Facebook" class="hover:text-indigo-600" href="#">
+      <i class="fab fa-facebook-square">
+      </i>
+     </a>
+     <a aria-label="Twitter" class="hover:text-indigo-600" href="#">
+      <i class="fab fa-twitter-square">
+      </i>
+     </a>
+     <a aria-label="Instagram" class="hover:text-indigo-600" href="#">
+      <i class="fab fa-instagram-square">
+      </i>
+     </a>
+     <a aria-label="LinkedIn" class="hover:text-indigo-600" href="#">
+      <i class="fab fa-linkedin">
+      </i>
+     </a>
+    </div>
+   </div>
+  </footer>
+  <script>
+   // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Auth modal elements
+    const authModal = document.getElementById('authModal');
+    const authModalTitle = document.getElementById('authModalTitle');
+    const authModalClose = document.getElementById('authModalClose');
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+    const mobileRegisterBtn = document.getElementById('mobileRegisterBtn');
+    const heroRegisterBtn = document.getElementById('heroRegisterBtn');
+    const authForm = document.getElementById('authForm');
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+    const cancelForgotPassword = document.getElementById('cancelForgotPassword');
+    const toggleAuthMode = document.getElementById('toggleAuthMode');
+    const authConfirmPasswordContainer = document.getElementById('authConfirmPasswordContainer');
+    const authFormSubmitBtn = authForm.querySelector('button[type="submit"]');
+
+    let isLoginMode = true;
+
+    function openAuthModal(login = true) {
+      isLoginMode = login;
+      authModal.classList.remove('hidden');
+      forgotPasswordForm.classList.add('hidden');
+      authForm.classList.remove('hidden');
+      if (isLoginMode) {
+        authModalTitle.textContent = 'Login';
+        authFormSubmitBtn.textContent = 'Login';
+        toggleAuthMode.textContent = "Don't have an account? Register";
+        authConfirmPasswordContainer.classList.add('hidden');
+      } else {
+        authModalTitle.textContent = 'Register';
+        authFormSubmitBtn.textContent = 'Register';
+        toggleAuthMode.textContent = 'Already have an account? Login';
+        authConfirmPasswordContainer.classList.remove('hidden');
+      }
+    }
+
+    function closeAuthModal() {
+      authModal.classList.add('hidden');
+      authForm.reset();
+      forgotPasswordForm.reset();
+    }
+
+    loginBtn.addEventListener('click', () => openAuthModal(true));
+    registerBtn.addEventListener('click', () => openAuthModal(false));
+    mobileLoginBtn.addEventListener('click', () => {
+      openAuthModal(true);
+      mobileMenu.classList.add('hidden');
+    });
+    mobileRegisterBtn.addEventListener('click', () => {
+      openAuthModal(false);
+      mobileMenu.classList.add('hidden');
+    });
+    heroRegisterBtn.addEventListener('click', () => openAuthModal(false));
+    authModalClose.addEventListener('click', closeAuthModal);
+
+    toggleAuthMode.addEventListener('click', () => {
+      openAuthModal(!isLoginMode);
+    });
+
+    forgotPasswordBtn.addEventListener('click', () => {
+      authForm.classList.add('hidden');
+      forgotPasswordForm.classList.remove('hidden');
+      authModalTitle.textContent = 'Reset Password';
+    });
+
+    cancelForgotPassword.addEventListener('click', () => {
+      forgotPasswordForm.classList.add('hidden');
+      authForm.classList.remove('hidden');
+      authModalTitle.textContent = isLoginMode ? 'Login' : 'Register';
+    });
+
+    // Form submission handlers (mock)
+    authForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(authForm);
+      const userType = formData.get('userType');
+      const email = formData.get('email');
+      const password = formData.get('password');
+      if (!isLoginMode) {
+        const confirmPassword = formData.get('confirmPassword');
+        if (password !== confirmPassword) {
+          alert('Passwords do not match.');
+          return;
+        }
+      }
+      alert(`${isLoginMode ? 'Login' : 'Registration'} successful for ${userType} with email: ${email}`);
+      closeAuthModal();
+    });
+
+    forgotPasswordForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(forgotPasswordForm);
+      const email = formData.get('forgotEmail');
+      alert(`Password reset link sent to ${email} if it exists in our system.`);
+      closeAuthModal();
+    });
+
+    // Therapist booking button click handler (mock)
+    document.querySelectorAll('#therapistList button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        alert('Booking feature coming soon! Please register or login to book an appointment.');
+        openAuthModal(true);
+      });
+    });
+
+    // Search form submission (mock)
+    const searchForm = document.getElementById('searchForm');
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Search functionality coming soon!');
+    });
+
+    // Contact form submission (mock)
+    const contactForm = document.querySelector('#contact form');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for contacting us! We will get back to you shortly.');
+      contactForm.reset();
+    });
+  </script>
+ </body>
+</html>
